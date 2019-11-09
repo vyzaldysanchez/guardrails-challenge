@@ -1,0 +1,37 @@
+version: '3.2'
+services:
+  postgres:
+    restart: always
+    image: bitnami/postgresql:latest
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: challenge
+      POSTGRES_PASSWORD: challenge
+      POSTGRES_DB: challenge
+    volumes:
+      - "/usr/local/postgresql-persistence:/var/lib/postgresql/data"
+
+  api:
+    restart: always
+    build: ./api
+    depends_on:
+      - postgres
+    environment:
+      DB_HOSTNAME: postgres
+      DB_USERNAME: challenge
+      DB_PASSWORD: challenge
+      DB_NAME: challenge
+      PORT: 3000
+    ports:
+      - "5000:3000"
+    volumes:
+      - "./api:/api:delegated"
+
+  # dashboard:
+  #   restart: always
+  #   build: ./dashboard
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     - "./dashboard:/dashboard:delegated"
