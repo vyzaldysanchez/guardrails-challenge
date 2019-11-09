@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 
 const db = require('./db');
 const { assignRoutes } = require('./routes');
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(compression);
 
 assignRoutes(app, router);
 
