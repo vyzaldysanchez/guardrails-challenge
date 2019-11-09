@@ -1,5 +1,11 @@
 version: '3.2'
 services:
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+
   postgres:
     restart: always
     image: bitnami/postgresql:latest
@@ -17,12 +23,14 @@ services:
     build: ./api
     depends_on:
       - postgres
+      - redis
     environment:
+      PORT: 3000
+      DB_NAME: challenge
       DB_HOSTNAME: postgres
       DB_USERNAME: challenge
       DB_PASSWORD: challenge
-      DB_NAME: challenge
-      PORT: 3000
+      REDIS_URL: redis://cache
     ports:
       - "5000:3000"
     volumes:
