@@ -7,7 +7,9 @@
   "scripts": {
     "test": "mocha -r @babel/register ./tests/**/*.js --exit",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "pm2 start --ext=js,json app.js --watch && pm2 logs app",
+    "clear-pm2": "pm2 stop app && pm2 delete app",
+    "start": "npm run clear-pm2 && pm2 start --ext=js,json app.js --watch && pm2 logs app",
+    "start-prod": "npm run clear-pm2 && pm2 start --ext=js,json ./dir/app.js --watch && pm2 logs app",
     "babel-node": "babel-node --presets @babel/preset-env",
     "build:watch": "npm-watch build",
     "sequelize": "sequelize",
@@ -15,7 +17,7 @@
     "unmigrate": "sequelize db:migrate:undo",
     "generate-migration": "sequelize migration:generate --name",
     "eslint": "eslint --quiet .",
-    "lint": "yarn run eslint"
+    "lint": "npm run eslint"
   },
   "watch": {
     "build": "{config,core,db,routes,scripts,tests,utils}/*.js"
