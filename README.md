@@ -1,4 +1,4 @@
-# JobsScrapper
+# Guardrails Challenge
 
 ## Install instructions
 
