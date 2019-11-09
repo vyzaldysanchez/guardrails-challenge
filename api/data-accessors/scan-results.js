@@ -1,8 +1,8 @@
 'use strict';
 
 const DEFAULT_LIST_ORDER = [
-  ['CreatedAt', 'DESC'],
-  ['UpdatedAt', 'DESC'],
+  ['createdAt', 'DESC'],
+  ['updatedAt', 'DESC'],
 ];
 
 module.exports = function makeDataAccessor({
@@ -17,7 +17,7 @@ module.exports = function makeDataAccessor({
           order: DEFAULT_LIST_ORDER,
           raw: true,
         });
-      const cachedList = await cache.get('result-list');
+      const cachedList = await cache.getAsync('result-list');
 
       if (cachedList && cachedList.length === scanResults.length) {
         return cachedList;
@@ -26,30 +26,38 @@ module.exports = function makeDataAccessor({
       const results = scanResults.map(factory.makeScanResult);
 
       cache.del('result-list');
-      cache.set('result-list', results);
-      cache.expireat('result-list', Number.parseInt(new Date().setMinutes(15)/1000));
+
+      if (results.length) {
+        cache.setAsync('result-list', results);
+        cache.expireatAsync('result-list', Number.parseInt(new Date().setMinutes(15)/1000));
+      }
 
       return results;
     },
 
     async getById(id) {
-      const cachedResult = await cache.get(`result-${id}`);
+      const cachedResult = await cache.getAsync(`result-${id}`);
 
       if (cachedResult) {
         return cachedResult;
       }
 
-      const scanResult = await database.models.scan_results
+      let scanResult = await database.models.scan_results
         .findOne({
           where: { Id: id },
           raw: true,
         });
-      const result = factory.makeScanResult(scanResult);
 
-      cache.set(`result-${id}`, result);
-      cache.expireat(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+      cache.del(`result-${id}`);
 
-      return result;
+      if (scanResult) {
+        scanResult = factory.makeScanResult(scanResult);
+
+        cache.setAsync(`result-${id}`, result);
+        cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+      }
+
+      return scanResult;
     },
 
     async create(body) {
@@ -63,8 +71,11 @@ module.exports = function makeDataAccessor({
       const result = factory.makeScanResult(created);
 
       cache.del('result-list');
-      cache.set(`result-${result.id}`, scanResult);
-      cache.expireat(`result-${result.id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+
+      if (scan) {
+        cache.setAsync(`result-${result.id}`, result);
+        cache.expireatAsync(`result-${result.id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+      }
 
       return result;
     },
@@ -85,8 +96,11 @@ module.exports = function makeDataAccessor({
       const updated = await this.getById(id);
 
       cache.del('result-list');
-      cache.set(`result-${id}`, updated);
-      cache.expireat(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+
+      if (updated) {
+        cache.setAsync(`result-${id}`, updated);
+        cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+      }
 
       return true;
     },

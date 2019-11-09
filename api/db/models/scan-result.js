@@ -44,13 +44,13 @@ module.exports = function makeScanResultsTable(sequelize, DataTypes) {
     FinishedAt: {
       type: DataTypes.DATE,
     },
-    CreatedAt: {
+    createdAt: {
       type: DataTypes.DATE,
     },
-    UpdatedAt: {
+    updatedAt: {
       type: DataTypes.DATE,
     },
-    DeletedAt: {
+    deletedAt: {
       type: DataTypes.DATE,
     },
   }, { tableName: 'scan_results' });

@@ -5,7 +5,8 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
 const db = require('./db');
-// const { assignRoutes } = require('./scan-results');
+const scanResultsDB = require('./data-accessors')
+const initModule = require('./scan-results');
 
 const app = express();
 const router = express.Router();
@@ -16,9 +17,16 @@ Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(compression);
+app.use(compression());
 
-// assignRoutes(app, router);
+initModule({ router, database: scanResultsDB, monitor: Sentry });
+
+router.use(
+  '*',
+  (_req, res) => res.status(404).json({ message: 'Not Found' }),
+);
+
+app.use('/', router);
 
 (async () => {
   try {
