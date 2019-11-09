@@ -10,6 +10,9 @@ const { assignRoutes } = require('./routes');
 const app = express();
 const router = express.Router();
 const PORT = process.env.PORT || 3000;
+const Sentry = require('@sentry/node');
+
+Sentry.init({ dsn: process.env.SENTRY_DSN });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

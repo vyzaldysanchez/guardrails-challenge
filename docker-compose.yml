@@ -31,6 +31,7 @@ services:
       DB_USERNAME: challenge
       DB_PASSWORD: challenge
       REDIS_URL: redis://cache
+      SENTRY_DSN: https://428c8cb67271469aa670d92d4909e8b0@sentry.io/1814043
     ports:
       - "5000:3000"
     volumes:
