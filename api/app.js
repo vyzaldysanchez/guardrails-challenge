@@ -8,6 +8,7 @@ const rateLimit = require('express-rate-limit');
 const db = require('./db');
 const scanResultsDB = require('./data-accessors')
 const initModule = require('./scan-results');
+const { makeCaptureErrors } = require('./utils');
 
 const app = express();
 const router = express.Router();
@@ -25,7 +26,11 @@ app.use(cookieParser());
 app.use(compression());
 app.use(limiter);
 
-initModule({ router, database: scanResultsDB, monitor: Sentry });
+initModule({
+  router,
+  database: scanResultsDB,
+  captureErrors: makeCaptureErrors({ logger, monitor: Sentry }),
+});
 
 router.use(
   '*',

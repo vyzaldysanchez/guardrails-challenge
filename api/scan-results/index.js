@@ -1,7 +1,7 @@
 'use strict';
 
 
-function init({ database, router, monitor }) {
+function init({ database, router, captureErrors }) {
   router.get(
     '/scan-results',
     async function handleResultsList(_req, res) {
@@ -10,8 +10,7 @@ function init({ database, router, monitor }) {
 
         return res.status(200).json(list);
       } catch (e) {
-        console.log(e); // Use logger instead
-        monitor.captureException(e); // Extract with logger
+        captureErrors(e);
         return res.status(500).json({ message: 'Something went wrong when fetching list.' });
       }
     },
@@ -30,8 +29,7 @@ function init({ database, router, monitor }) {
 
         return res.status(404).json({ message: `Scan result with id ${id} not found.` });
       } catch (e) {
-        console.log(e); // Use logger instead
-        monitor.captureException(e); // Extract with logger
+        captureErrors(e);
         return res.status(500).json({ message: 'Something went wrong...' });
       }
     },
@@ -45,8 +43,7 @@ function init({ database, router, monitor }) {
 
         return res.status(201).json(result);
       } catch (e) {
-        console.log(e); // Use logger instead
-        monitor.captureException(e); // Extract with logger
+        captureErrors(e);
         return res.status(500).json({ message: 'Something went wrong when creating result...' });
       }
     },
