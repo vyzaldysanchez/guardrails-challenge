@@ -1,6 +1,7 @@
 version: '3.2'
 services:
   redis:
+    restart: always
     image: redis
     container_name: cache
     expose:
@@ -9,6 +10,7 @@ services:
   postgres:
     restart: always
     image: bitnami/postgresql:latest
+    container_name: database
     ports:
       - "5433:5432"
     environment:
@@ -20,6 +22,7 @@ services:
 
   api:
     restart: always
+    container_name: api
     build: ./api
     depends_on:
       - postgres
