@@ -35,7 +35,22 @@ function init({ database, router, monitor }) {
         return res.status(500).json({ message: 'Something went wrong...' });
       }
     },
-  )
+  );
+
+  router.post(
+    '/scan-results',
+    async (req, res) => {
+      try {
+        const result = await database.create(req.body);
+
+        return res.status(201).json(result);
+      } catch (e) {
+        console.log(e); // Use logger instead
+        monitor.captureException(e); // Extract with logger
+        return res.status(500).json({ message: 'Something went wrong when creating result...' });
+      }
+    },
+  );
 }
 
 module.exports = init;
