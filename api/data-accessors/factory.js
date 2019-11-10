@@ -87,8 +87,6 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
         Findings: findings.map(finding => this.buildFinding(finding)),
       };
 
-      console.log(queuedAt);
-
       if (queuedAt) {
         scanResult.QueuedAt = date(queuedAt);
       }

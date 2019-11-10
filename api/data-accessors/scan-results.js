@@ -42,15 +42,11 @@ module.exports = function makeDataAccessor({
         return cachedResult;
       }
 
-      console.log(id);
-
       let scanResult = await database.models.scan_results
         .findOne({
           where: { Id: id },
           raw: true,
         });
-
-      console.log(scanResult);
 
       cache.del(`result-${id}`);
 
@@ -69,7 +65,6 @@ module.exports = function makeDataAccessor({
       const created = await database.models.scan_results.create(
         { ...scanResult, createdAt: currentDate, updatedAt: currentDate },
       );
-      console.log(created.dataValues);
       const result = factory.makeScanResult(created.dataValues);
 
       cache.del('result-list');
