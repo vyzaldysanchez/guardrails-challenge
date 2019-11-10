@@ -8,7 +8,7 @@ const rateLimit = require('express-rate-limit');
 const db = require('./db');
 const scanResultsDB = require('./data-accessors')
 const initModule = require('./scan-results');
-const { makeCaptureErrors } = require('./utils');
+const { makeCaptureErrors, logger } = require('./utils');
 
 const app = express();
 const router = express.Router();
