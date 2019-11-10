@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function makeFactory({ severities, statuses, generateId } = {}) {
+module.exports = function makeFactory({ severities, statuses, generateId, date } = {}) {
   return Object.freeze({
     buildMetadata({ description, severity } = {}) {
       if (!description) {
@@ -87,16 +87,18 @@ module.exports = function makeFactory({ severities, statuses, generateId } = {})
         Findings: findings.map(finding => this.buildFinding(finding)),
       };
 
+      console.log(queuedAt);
+
       if (queuedAt) {
-        scanResult.QueuedAt = queuedAt;
+        scanResult.QueuedAt = date(queuedAt);
       }
 
       if (scanningAt) {
-        scanResult.ScanningAt = scanningAt;
+        scanResult.ScanningAt = date(scanningAt);
       }
 
       if (finishedAt) {
-        scanResult.FinishedAt = finishedAt;
+        scanResult.FinishedAt = date(finishedAt);
       }
 
       return Object.freeze(scanResult);

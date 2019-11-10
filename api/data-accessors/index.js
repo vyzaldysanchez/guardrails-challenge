@@ -1,6 +1,7 @@
 'use strict';
 
-const uuid = require('uuid/v4')
+const uuid = require('uuid/v4');
+const moment = require('moment-timezone');
 
 const { cache } = require('../utils');
 const database = require('../db');
@@ -10,6 +11,7 @@ const makeScanResultsFactory = require('./factory');
 
 const factory = makeScanResultsFactory({
   generateId: () => uuid(),
+  date: moment,
   severities: Object.values(SEVERITIES),
   statuses: Object.values(STATUSES),
 });

@@ -28,7 +28,7 @@ module.exports = function makeDataAccessor({
       cache.del('result-list');
 
       if (results.length) {
-        cache.setAsync('result-list', results);
+        cache.setAsync('result-list', JSON.stringify(results));
         cache.expireatAsync('result-list', Number.parseInt(new Date().setMinutes(15)/1000));
       }
 
@@ -53,7 +53,7 @@ module.exports = function makeDataAccessor({
       if (scanResult) {
         scanResult = factory.makeScanResult(scanResult);
 
-        cache.setAsync(`result-${id}`, result);
+        cache.setAsync(`result-${id}`, JSON.stringify(result));
         cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
       }
 
@@ -61,18 +61,17 @@ module.exports = function makeDataAccessor({
     },
 
     async create(scanResult) {
-      const transaction = await database.transaction();
       const currentDate = new Date();
       const created = await database.models.scan_results.create(
-        { ...scanResult, CreatedAt: currentDate, UpdatedAt: currentDate },
-        { transaction },
+        { ...scanResult, createdAt: currentDate, updatedAt: currentDate },
       );
-      const result = factory.makeScanResult(created);
+      console.log(created.dataValues);
+      const result = factory.makeScanResult(created.dataValues);
 
       cache.del('result-list');
 
       if (result) {
-        cache.setAsync(`result-${result.id}`, result);
+        cache.setAsync(`result-${result.id}`, JSON.stringify(result));
         cache.expireatAsync(`result-${result.id}`, Number.parseInt(new Date().setMinutes(15)/1000));
       }
 
@@ -80,14 +79,10 @@ module.exports = function makeDataAccessor({
     },
 
     async update(id, update) {
-      const transaction = await database.transaction();
-      const scanResult = factory.buildScanResult({ id, ...update });
-
       await database.models.scan_results
         .update(
-          { ...scanResult, UpdatedAt: new Date() },
+          { ...update, updatedAt: new Date() },
           {
-            transaction,
             where: { Id: id },
           },
         );
@@ -97,7 +92,7 @@ module.exports = function makeDataAccessor({
       cache.del('result-list');
 
       if (updated) {
-        cache.setAsync(`result-${id}`, updated);
+        cache.setAsync(`result-${id}`, JSON.stringify(updated));
         cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
       }
 
