@@ -112,6 +112,34 @@
           }
         }
       }
+    },
+    "/scan-results/{id}": {
+      "get": {
+        "tags": ["Security Scan Result item"],
+        "summary": "Returns a security scan result by id.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Security Scan Result identifier",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   }
 }
