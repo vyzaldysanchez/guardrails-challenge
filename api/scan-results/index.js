@@ -40,8 +40,6 @@ function init({ database, router, captureErrors, factory }) {
     async (req, res) => {
       let payload;
 
-      console.log(req.body)
-
       try {
         payload = factory.buildScanResult(req.body);
       } catch (e) {

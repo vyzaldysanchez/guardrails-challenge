@@ -42,18 +42,22 @@ module.exports = function makeDataAccessor({
         return cachedResult;
       }
 
+      console.log(id);
+
       let scanResult = await database.models.scan_results
         .findOne({
           where: { Id: id },
           raw: true,
         });
 
+      console.log(scanResult);
+
       cache.del(`result-${id}`);
 
       if (scanResult) {
         scanResult = factory.makeScanResult(scanResult);
 
-        cache.setAsync(`result-${id}`, JSON.stringify(result));
+        cache.setAsync(`result-${id}`, JSON.stringify(scanResult));
         cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
       }
 
