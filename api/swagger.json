@@ -83,18 +83,18 @@
                             "type": "string"
                           }
                         }
-                      },
-                      "queuedAt": {
-                        "type": "string"
-                      },
-                      "scanningAt": {
-                        "type": "string"
-                      },
-                      "finishedAt": {
-                        "type": "string"
                       }
                     }
                   }
+                },
+                "queuedAt": {
+                  "type": "string"
+                },
+                "scanningAt": {
+                  "type": "string"
+                },
+                "finishedAt": {
+                  "type": "string"
                 }
               }
             }
