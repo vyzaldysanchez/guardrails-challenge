@@ -47,7 +47,7 @@ module.exports = function makeFactory({ severities, statuses, generateId } = {})
         throw new Error('Finding must have a type.');
       }
 
-      if (ruleId) {
+      if (!ruleId) {
         throw new Error('Finding must have a rule ID.');
       }
 
@@ -129,7 +129,7 @@ module.exports = function makeFactory({ severities, statuses, generateId } = {})
         },
 
         get finishedAt() {
-          return results.FinishedAt;
+          return result.FinishedAt;
         }
       });
     },

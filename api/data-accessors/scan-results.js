@@ -71,7 +71,7 @@ module.exports = function makeDataAccessor({
 
       cache.del('result-list');
 
-      if (scan) {
+      if (result) {
         cache.setAsync(`result-${result.id}`, result);
         cache.expireatAsync(`result-${result.id}`, Number.parseInt(new Date().setMinutes(15)/1000));
       }

@@ -10,8 +10,8 @@ const makeScanResultsFactory = require('./factory');
 
 const factory = makeScanResultsFactory({
   generateId: () => uuid(),
-  severities: SEVERITIES,
-  statuses: STATUSES,
+  severities: Object.values(SEVERITIES),
+  statuses: Object.values(STATUSES),
 });
 
 const scanResultsDB = makeScanResultsDataAccess({
