@@ -4,11 +4,14 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const rateLimit = require('express-rate-limit');
+const swaggerUI = require('swagger-ui-express');
+const bodyParser = require('body-parser');
 
 const db = require('./db');
-const scanResultsDB = require('./data-accessors')
+const { scanResultsDB, factory } = require('./data-accessors');
 const initModule = require('./scan-results');
 const { makeCaptureErrors, logger } = require('./utils');
+const swaggerConfig = require('./swagger.json');
 
 const app = express();
 const router = express.Router();
@@ -21,16 +24,20 @@ const limiter = rateLimit({
 
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
 app.use(limiter);
 
 initModule({
   router,
+  factory,
   database: scanResultsDB,
-  captureErrors: makeCaptureErrors({ logger, monitor: Sentry }),
+  captureErrors: makeCaptureErrors({ logger, monitor: Sentry }).captureError,
 });
+
+router.use('/api-docs', swaggerUI.serve);
+router.get('/api-docs', swaggerUI.setup(swaggerConfig));
 
 router.use(
   '*',

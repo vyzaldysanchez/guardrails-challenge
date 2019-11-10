@@ -1,7 +1,7 @@
 'use strict';
 
 
-function init({ database, router, captureErrors }) {
+function init({ database, router, captureErrors, factory }) {
   router.get(
     '/scan-results',
     async function handleResultsList(_req, res) {
@@ -38,8 +38,16 @@ function init({ database, router, captureErrors }) {
   router.post(
     '/scan-results',
     async (req, res) => {
+      let payload;
+
       try {
-        const result = await database.create(req.body);
+        payload = factory.buildScanResult(req.body);
+      } catch (e) {
+        return res.status(400).json({ message: e.message });
+      }
+
+      try {
+        const result = await database.create(payload);
 
         return res.status(201).json(result);
       } catch (e) {

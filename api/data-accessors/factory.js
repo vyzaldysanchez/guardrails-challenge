@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function makeFactory({ severities, statuses, generateId } = {}) {
+module.exports = function makeFactory({ severities, statuses, generateId, date } = {}) {
   return Object.freeze({
     buildMetadata({ description, severity } = {}) {
       if (!description) {
@@ -47,7 +47,7 @@ module.exports = function makeFactory({ severities, statuses, generateId } = {})
         throw new Error('Finding must have a type.');
       }
 
-      if (ruleId) {
+      if (!ruleId) {
         throw new Error('Finding must have a rule ID.');
       }
 
@@ -88,15 +88,15 @@ module.exports = function makeFactory({ severities, statuses, generateId } = {})
       };
 
       if (queuedAt) {
-        scanResult.QueuedAt = queuedAt;
+        scanResult.QueuedAt = date(queuedAt);
       }
 
       if (scanningAt) {
-        scanResult.ScanningAt = scanningAt;
+        scanResult.ScanningAt = date(scanningAt);
       }
 
       if (finishedAt) {
-        scanResult.FinishedAt = finishedAt;
+        scanResult.FinishedAt = date(finishedAt);
       }
 
       return Object.freeze(scanResult);
@@ -129,7 +129,7 @@ module.exports = function makeFactory({ severities, statuses, generateId } = {})
         },
 
         get finishedAt() {
-          return results.FinishedAt;
+          return result.FinishedAt;
         }
       });
     },
