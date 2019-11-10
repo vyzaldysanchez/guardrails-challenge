@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/vyzaldysanchez/guardrails-challenge"
   },
   "keywords": [
     "javascript",
@@ -35,9 +35,9 @@
   "author": "Vyzaldy Sanchez",
   "license": "MIT",
   "bugs": {
-    "url": "repo/issues"
+    "url": "https://github.com/vyzaldysanchez/guardrails-challenge/issues"
   },
-  "homepage": "repo#readme",
+  "homepage": "https://github.com/vyzaldysanchez/guardrails-challenge#readme",
   "dependencies": {
     "@sentry/node": "^5.7.1",
     "bluebird": "^3.7.1",
