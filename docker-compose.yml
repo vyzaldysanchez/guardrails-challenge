@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.3'
 services:
   redis:
     restart: always
@@ -30,7 +30,7 @@ services:
     environment:
       PORT: 3000
       NODE_ENV: production
-      # NODE_ENV: develop
+      # NODE_ENV: development
       DB_NAME: challenge
       DB_HOSTNAME: postgres
       DB_USERNAME: challenge
@@ -42,10 +42,14 @@ services:
     volumes:
       - "./api:/api:delegated"
 
-  # dashboard:
-  #   restart: always
-  #   build: ./dashboard
-  #   ports:
-  #     - "5000:5000"
-  #   volumes:
-  #     - "./dashboard:/dashboard:delegated"
+  dashboard:
+    restart: always
+    container_name: dashboard
+    build: ./dashboard
+    environment:
+      NODE_ENV: development
+      # - NODE_ENV: production
+    ports:
+      - "3001:3000"
+    volumes:
+      - "./dashboard:/dashboard:delegated"
