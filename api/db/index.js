@@ -40,6 +40,4 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-sequelize.models.scan_results.create()
-
 module.exports = sequelize;
