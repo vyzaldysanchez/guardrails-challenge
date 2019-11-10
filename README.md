@@ -17,6 +17,18 @@ It consists of the following tech stack:
   * [Mocha](http://mochajs.org/) + node's [assert module](https://nodejs.org/api/assert.html) for testing.
 * A frontend Dashboard built with [React](https://reactjs.org/) in order to display the data.
 
+## API Description
+
+The API exposes 3 necessary endpoints for this to work:
+
+* `GET /scans-results` to get the list of all Security Scan Results.
+* `GET /scans-results/{id}` to get a single Security Scan Result item.
+* `POST /scans-results` in order to create Security Scan Result items into the database.
+
+The API documentation is exposed on `/api-docs` with [Swagger](https://swagger.io/).
+
+The API is available on port `5000` in your local env after intalling and running the containers.
+
 ## Install instructions
 
 First you should install [docker](https://www.docker.com/get-started) locally, this is due to the project running in a docker container. You won't need anything more, `docker` will download everything.
