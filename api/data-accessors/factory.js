@@ -27,10 +27,6 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
         throw new Error('Finding location position must have a begin line.');
       }
 
-      if (!positions.begin || !positions.begin.line) {
-        throw new Error('Finding location position must have a begin line.');
-      }
-
       return Object.freeze({
         path,
         positions: Object.freeze(positions),
