@@ -5,11 +5,11 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "mocha -r @babel/register ./tests/**/*.js --exit",
+    "test": "mocha ./tests/**/*.js --exit",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "clear-pm2": "pm2 stop app && pm2 delete app",
-    "start": "pm2 start --ext=js,json app.js --watch && pm2 logs app",
-    "start-prod": "pm2 start --ext=js,json ./dir/app.js --watch && pm2 logs app",
+    "start": "pm2 start --ext=js,json pm2.yml --watch && pm2 logs app",
+    "start-prod": "pm2 start --ext=js,json pm2.prod.yml --watch && pm2 logs app",
     "babel-node": "babel-node --presets @babel/preset-env",
     "build:watch": "npm-watch build",
     "sequelize": "sequelize",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/vyzaldysanchez/guardrails-challenge"
   },
   "keywords": [
     "javascript",
@@ -35,9 +35,9 @@
   "author": "Vyzaldy Sanchez",
   "license": "MIT",
   "bugs": {
-    "url": "repo/issues"
+    "url": "https://github.com/vyzaldysanchez/guardrails-challenge/issues"
   },
-  "homepage": "repo#readme",
+  "homepage": "https://github.com/vyzaldysanchez/guardrails-challenge#readme",
   "dependencies": {
     "@sentry/node": "^5.7.1",
     "bluebird": "^3.7.1",

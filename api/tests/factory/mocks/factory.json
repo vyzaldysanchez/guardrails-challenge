@@ -1,0 +1,25 @@
+{
+  "basePayload": {
+    "repositoryName": "string",
+    "status": "Queued",
+    "findings": [
+      {
+        "type": "string",
+        "ruleId": "string",
+        "location": {
+          "path": "string",
+          "positions": {
+            "begin": {
+              "line": "string"
+            }
+          }
+        },
+        "metadata": {
+          "severity": "HIGH",
+          "description": "string"
+        }
+      }
+    ],
+    "queuedAt": "2019-11-10T04:20:56.324Z"
+  }
+}
