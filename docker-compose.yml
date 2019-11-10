@@ -1,8 +1,16 @@
 version: '3.2'
 services:
+  redis:
+    restart: always
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+
   postgres:
     restart: always
     image: bitnami/postgresql:latest
+    container_name: database
     ports:
       - "5433:5432"
     environment:
@@ -14,15 +22,21 @@ services:
 
   api:
     restart: always
+    container_name: api
     build: ./api
     depends_on:
       - postgres
+      - redis
     environment:
+      PORT: 3000
+      NODE_ENV: production
+      # NODE_ENV: develop
+      DB_NAME: challenge
       DB_HOSTNAME: postgres
       DB_USERNAME: challenge
       DB_PASSWORD: challenge
-      DB_NAME: challenge
-      PORT: 3000
+      REDIS_URL: redis://cache
+      SENTRY_DSN: https://428c8cb67271469aa670d92d4909e8b0@sentry.io/1814043
     ports:
       - "5000:3000"
     volumes:
