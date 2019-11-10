@@ -55,3 +55,9 @@ Notice that after starting the container, the server will be running already.
 ## To Take into Consideration
 
 We are using [sequelize](http://docs.sequelizejs.com/manual/installation/getting-started) in order to manage DB operations.
+
+## Coming soon
+
+* Important unit tests coverage
+* Integration tests
+* React Dashboard
