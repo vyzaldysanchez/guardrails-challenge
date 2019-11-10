@@ -60,8 +60,7 @@ module.exports = function makeDataAccessor({
       return scanResult;
     },
 
-    async create(body) {
-      let scanResult = factory.buildScanResult(body);
+    async create(scanResult) {
       const transaction = await database.transaction();
       const currentDate = new Date();
       const created = await database.models.scan_results.create(

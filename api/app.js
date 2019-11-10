@@ -6,7 +6,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 
 const db = require('./db');
-const scanResultsDB = require('./data-accessors')
+const { scanResultsDB, factory } = require('./data-accessors');
 const initModule = require('./scan-results');
 const { makeCaptureErrors, logger } = require('./utils');
 
@@ -28,6 +28,7 @@ app.use(limiter);
 
 initModule({
   router,
+  factory,
   database: scanResultsDB,
   captureErrors: makeCaptureErrors({ logger, monitor: Sentry }),
 });
