@@ -20,7 +20,7 @@ services:
       POSTGRES_PASSWORD: challenge
       POSTGRES_DB: challenge
     volumes:
-      - "/usr/local/postgresql-persistence:/var/lib/postgresql/data"
+      - "pgdata:/var/lib/postgresql/data"
     networks:
       - backend
 
@@ -70,3 +70,6 @@ services:
 networks:
   backend:
   frontend:
+
+volumes:
+  pgdata:
