@@ -29,8 +29,7 @@ export default function CreateScanResultForm() {
           </label>
           <div className="relative">
             <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="status" defaultValue="">
-              <option disabled value="">Select a status</option>
+              id="status" defaultValue={STATUSES[0]}>
               {STATUSES.map(renderStatusOption)}
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -44,7 +43,7 @@ export default function CreateScanResultForm() {
             Queued At
           </label>
           <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="date" id="queuedAt" />
+            type="datetime-local" id="queuedAt" />
         </div>
 
         <div className="mb-4 mx-2">
@@ -52,7 +51,7 @@ export default function CreateScanResultForm() {
             Scanning At
           </label>
           <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="date" id="scanningAt" />
+            type="datetime-local" id="scanningAt" />
         </div>
 
         <div className="mb-4 mx-2">
@@ -60,7 +59,7 @@ export default function CreateScanResultForm() {
             Finished At
           </label>
           <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="date" id="finishedAt" />
+            type="datetime-local" id="finishedAt" />
         </div>
       </div>
     </form>
