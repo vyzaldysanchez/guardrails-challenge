@@ -51,6 +51,10 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
         throw new Error('Finding must have a location.');
       }
 
+      if (!metadata) {
+        throw new Error('Finding must have a location.');
+      }
+
       return Object.freeze({
         type,
         ruleId,

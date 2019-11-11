@@ -1,7 +1,6 @@
 'use strict';
 
 const assert = require('assert');
-const moment = require('moment-timezone');
 
 const makeFactory = require('./../../data-accessors/factory');
 
