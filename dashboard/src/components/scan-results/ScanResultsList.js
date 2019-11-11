@@ -1,31 +1,24 @@
 import React from 'react';
 
 import ScanResultsListItem from './ScanResultsListItem';
+import TableList from '../shared/TableList';
 
 function renderScanResultsListItem(result) {
   return <ScanResultsListItem key={`scan-result-${result.id}`} result={result} />;
 }
 
+const FIELDS = [
+  'Repository Name',
+  'Status',
+  'Created At',
+  'Queued At',
+  'Scanning At',
+  'Finished At',
+  'Findings',
+];
+
 export default function ScanResultsList({ scanResults }) {
   return (
-    <div className="w-full table-container mt-5">
-      <table className="table-auto full-width w-full">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">Repository Name</th>
-            <th className="px-4 py-2">Status</th>
-            <th className="px-4 py-2">Created At</th>
-            <th className="px-4 py-2">Queued At</th>
-            <th className="px-4 py-2">Scanning At</th>
-            <th className="px-4 py-2">Finished At</th>
-            <th className="px-4 py-2">Findings</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {scanResults.map(renderScanResultsListItem)}
-        </tbody>
-      </table>
-    </div>
+    <TableList fields={FIELDS} items={scanResults} renderListItem={renderScanResultsListItem} />
   );
 }
