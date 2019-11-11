@@ -6,6 +6,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const swaggerUI = require('swagger-ui-express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const db = require('./db');
 const { scanResultsDB, factory } = require('./data-accessors');
@@ -15,7 +16,7 @@ const swaggerConfig = require('./swagger.json');
 
 const app = express();
 const router = express.Router();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 const Sentry = require('@sentry/node');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
 app.use(limiter);
+app.use(cors())
 
 initModule({
   router,
