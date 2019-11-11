@@ -4,18 +4,14 @@ import axios from 'axios';
 import * as Sentry from '@sentry/browser';
 
 import useScanResultsService from '../../services/scan-results';
-import ListResultItem from './ListResultItem';
+import ScanResultsList from '../scan-results/ScanResultsList';
 
 const { fetchScanResults } = useScanResultsService({
   http: axios,
   captureError: Sentry.captureException,
 });
 
-function renderListResultItem(result) {
-  return <ListResultItem key={`scan-result-${result.id}`} result={result} />;
-}
-
-export default function List() {
+export default function ScanResults() {
   const [scanResults, setScanResults] = useState([]);
 
   useEffect(() => {
@@ -36,25 +32,7 @@ export default function List() {
         </Link>
       </div>
 
-      <div className="w-full table-container mt-5">
-        <table className="table-auto full-width w-full">
-          <thead>
-            <tr>
-              <th className="px-4 py-2">Repository Name</th>
-              <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2">Created At</th>
-              <th className="px-4 py-2">Queued At</th>
-              <th className="px-4 py-2">Scanning At</th>
-              <th className="px-4 py-2">Finished At</th>
-              <th className="px-4 py-2">Findings</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {scanResults.map(renderListResultItem)}
-          </tbody>
-        </table>
-      </div>
+      <ScanResultsList scanResults={scanResults} />
     </div>
   );
 }

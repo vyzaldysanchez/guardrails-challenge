@@ -6,8 +6,9 @@ import {
 } from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 
-import Header from './components/page/Header';
-import List from './components/scan-results/List';
+import Header from './components/pages/Header';
+import ScanResults from './components/pages/ScanResults';
+import Findings from './components/pages/Findings';
 
 Sentry.init({ dns: process.env.REACT_APP_SENTRY_DSN });
 
@@ -23,10 +24,11 @@ function App() {
           </Route>
 
           <Route path="/scan-results/:scanResultId/findings">
+            <Findings />
           </Route>
 
           <Route path="/">
-            <List />
+            <ScanResults />
           </Route>
         </Switch>
       </div>

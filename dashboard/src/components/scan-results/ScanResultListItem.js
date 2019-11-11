@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { toDateString } from '../../services/date';
 import useRoutingService from '../../services/routing';
 
-export default function ListResultItem({ result }) {
+export default function ScanResultListItem({ result }) {
   const routing = useRoutingService({ history: useHistory() });
 
   return (
