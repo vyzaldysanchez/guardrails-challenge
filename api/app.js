@@ -18,8 +18,9 @@ const app = express();
 const router = express.Router();
 const PORT = process.env.PORT || 80;
 const Sentry = require('@sentry/node');
+const RATE_LIMITING_TIME = 15 * 60 * 1000; // 15 minutes
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: RATE_LIMITING_TIME,
   max: 100,
 });
 

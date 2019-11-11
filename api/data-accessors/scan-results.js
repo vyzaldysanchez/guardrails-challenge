@@ -4,6 +4,7 @@ const DEFAULT_LIST_ORDER = [
   ['createdAt', 'DESC'],
   ['updatedAt', 'DESC'],
 ];
+const CACHE_EXPIRATION_TIME = Number.parseInt(new Date().setMinutes(15)/1000);
 
 module.exports = function makeDataAccessor({
   cache,
@@ -29,7 +30,7 @@ module.exports = function makeDataAccessor({
 
       if (results.length) {
         cache.setAsync('result-list', JSON.stringify(results));
-        cache.expireatAsync('result-list', Number.parseInt(new Date().setMinutes(15)/1000));
+        cache.expireatAsync('result-list', CACHE_EXPIRATION_TIME);
       }
 
       return results;
@@ -54,7 +55,7 @@ module.exports = function makeDataAccessor({
         scanResult = factory.makeScanResult(scanResult);
 
         cache.setAsync(`result-${id}`, JSON.stringify(scanResult));
-        cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+        cache.expireatAsync(`result-${id}`, CACHE_EXPIRATION_TIME);
       }
 
       return scanResult;
@@ -71,7 +72,7 @@ module.exports = function makeDataAccessor({
 
       if (result) {
         cache.setAsync(`result-${result.id}`, JSON.stringify(result));
-        cache.expireatAsync(`result-${result.id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+        cache.expireatAsync(`result-${result.id}`, CACHE_EXPIRATION_TIME);
       }
 
       return result;
@@ -92,7 +93,7 @@ module.exports = function makeDataAccessor({
 
       if (updated) {
         cache.setAsync(`result-${id}`, JSON.stringify(updated));
-        cache.expireatAsync(`result-${id}`, Number.parseInt(new Date().setMinutes(15)/1000));
+        cache.expireatAsync(`result-${id}`, CACHE_EXPIRATION_TIME);
       }
 
       return true;
