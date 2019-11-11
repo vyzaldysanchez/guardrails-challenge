@@ -25,9 +25,21 @@ The API exposes 3 necessary endpoints for this to work:
 * `GET /scans-results/{id}` to get a single Security Scan Result item.
 * `POST /scans-results` to create Security Scan Result items into the database.
 
-The API documentation is exposed on `/api-docs` with [Swagger](https://swagger.io/).
+The API is available on `localhost:5000` in your local env after installing and running the containers.
 
-The API is available on port `5000` in your local env after installing and running the containers.
+The API documentation is exposed on `localhost:5000/api-docs` with [Swagger](https://swagger.io/).
+
+## Dashboard Description
+
+The frontend dashboard is built with [React](https://reactjs.org/) using the latest [React Hooks API](https://reactjs.org/docs/hooks-reference.html).
+
+This dashboard consists of 3 pages:
+
+* The home page, which displays a list of Security Scan Results.
+* The `/scan-results/:id/findings` page, which displays the list of findings for a certain Security Scan Result.
+* The `/create` page which displays a form in order to add Security Scan Results into the system.
+
+After initializing the containers, the dashboard will be available on `http://localhost:3001/` in your local environment.
 
 ## Install instructions
 
@@ -60,4 +72,3 @@ We are using [sequelize](http://docs.sequelizejs.com/manual/installation/getting
 
 * Important unit tests coverage
 * Integration tests
-* React Dashboard
