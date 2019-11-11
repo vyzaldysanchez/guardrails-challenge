@@ -14,7 +14,7 @@ It consists of the following tech stack:
   * [Sentry](https://sentry.io/) to log system errors and keep track of them.
   * [Winston](https://www.npmjs.com/package/winston) to do logging.
   * [PostgreSQL](https://www.postgresql.org/) as DB and [Sequelize](http://docs.sequelizejs.com/manual/installation/getting-started) as abstraction.
-  * [Mocha](http://mochajs.org/) + node's [assert module](https://nodejs.org/api/assert.html) for testing.
+  * [Mocha](http://mochajs.org/) + Node.js's [assert module](https://nodejs.org/api/assert.html) for testing.
 * A frontend Dashboard built with [React](https://reactjs.org/) to display the data.
 
 ## API Description
@@ -46,7 +46,7 @@ You run `./docker-challenge up -d --build` to start running the container and al
 
 ## Running the server
 
-* `./docker-challenge exec api npm run build` to transpile JS code to use ES6 in NodeJS(no needed for dev).
+* `./docker-challenge exec api npm run build` to transpile JS code to use ES6 in Node.js (no needed for dev).
 * `./docker-challenge exec api npm run build:watch` to auto-generate the transpiled files on changes.
 * `./docker-challenge exec api npm start` to run the server.
 
