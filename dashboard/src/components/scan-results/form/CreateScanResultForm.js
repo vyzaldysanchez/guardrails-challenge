@@ -3,6 +3,7 @@ import useForm from 'react-hook-form';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
 import Input from '../../shared/Input';
+import RequiredLabel from '../../shared/RequiredLabel';
 
 
 const STATUSES = [
@@ -20,10 +21,6 @@ const statusIsRequired = {
 
 function renderStatusOption(status) {
   return <option key={status} value={status}>{status}</option>;
-}
-
-function renderRequiredLabel() {
-  return <label className="uppercase tracking-wide text-red-700 text-xs font-bold ml-1">(Required)</label>;
 }
 
 function hasErrors(errors) {
@@ -75,7 +72,7 @@ export default function CreateScanResultForm({ createScanResult, onCreate }) {
           <label className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="status">
             Status
           </label>
-          {renderRequiredLabel()}
+          <RequiredLabel />
           <div className="relative">
             <select className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="status" name="status" defaultValue={STATUSES[0]} ref={register({ required: true })}>
