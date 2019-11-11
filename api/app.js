@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
 app.use(limiter);
-app.use(cors())
+app.use(cors());
 
 initModule({
   router,

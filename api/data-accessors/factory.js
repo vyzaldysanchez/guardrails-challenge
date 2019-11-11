@@ -126,6 +126,10 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
 
         get finishedAt() {
           return result.FinishedAt;
+        },
+
+        get createdAt() {
+          return result.createdAt;
         }
       });
     },
