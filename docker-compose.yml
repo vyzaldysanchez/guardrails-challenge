@@ -20,7 +20,7 @@ services:
       POSTGRES_PASSWORD: challenge
       POSTGRES_DB: challenge
     volumes:
-      - "pgdata:/var/lib/postgresql/data"
+      - /srv/docker/postgresql:/var/lib/postgresql
     networks:
       - backend
 
@@ -70,6 +70,3 @@ services:
 networks:
   backend:
   frontend:
-
-volumes:
-  pgdata:

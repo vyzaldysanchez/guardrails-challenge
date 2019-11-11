@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
+
 import Header from './components/page/Header';
 import List from './components/scan-results/List';
 
@@ -21,7 +22,7 @@ function App() {
 
           </Route>
 
-          <Route path="/scan-results/:id/findings">
+          <Route path="/scan-results/:scanResultId/findings">
           </Route>
 
           <Route path="/">
