@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ScanResultListItem from './ScanResultListItem';
+import ScanResultsListItem from './ScanResultsListItem';
 
-function renderScanResultListItem(result) {
-  return <ScanResultListItem key={`scan-result-${result.id}`} result={result} />;
+function renderScanResultsListItem(result) {
+  return <ScanResultsListItem key={`scan-result-${result.id}`} result={result} />;
 }
 
 export default function ScanResultsList({ scanResults }) {
@@ -23,7 +23,7 @@ export default function ScanResultsList({ scanResults }) {
         </thead>
 
         <tbody>
-          {scanResults.map(renderScanResultListItem)}
+          {scanResults.map(renderScanResultsListItem)}
         </tbody>
       </table>
     </div>

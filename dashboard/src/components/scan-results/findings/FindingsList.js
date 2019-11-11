@@ -1,8 +1,8 @@
 import React from 'react';
-// import ListResultItem from './ListResultItem';
+import FindingsListItem from './FindingsListItem';
 
-function renderListResultItem(result) {
-  // return <ListResultItem key={`scan-result-${result.id}`} result={result} />;
+function renderListItem(finding) {
+  return <FindingsListItem key={`scan-result-finding-${finding.description}-${finding.location.path}`} finding={finding} />;
 }
 
 export default function FindingsList({ findings }) {
@@ -19,7 +19,7 @@ export default function FindingsList({ findings }) {
         </thead>
 
         <tbody>
-          {findings.map(renderListResultItem)}
+          {findings.map(renderListItem)}
         </tbody>
       </table>
     </div>
