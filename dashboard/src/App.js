@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/browser';
 import Header from './components/pages/Header';
 import ScanResults from './components/pages/ScanResults';
 import Findings from './components/pages/Findings';
+import CreateScanResult from './components/pages/CreateScanResult';
 
 Sentry.init({ dns: process.env.REACT_APP_SENTRY_DSN });
 
@@ -20,7 +21,7 @@ function App() {
       <div className="container mx-auto pt-8">
         <Switch>
           <Route path="/create">
-
+            <CreateScanResult />
           </Route>
 
           <Route path="/scan-results/:scanResultId/findings">
