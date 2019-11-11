@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as Sentry from '@sentry/browser';
 
-import makeScanResultsService from '../../services/scan-results';
+import useScanResultsService from '../../services/scan-results';
 import ListResultItem from './ListResultItem';
 
-const { fetchScanResults } = makeScanResultsService({
+const { fetchScanResults } = useScanResultsService({
   http: axios,
   captureError: Sentry.captureException,
 });
@@ -27,8 +28,12 @@ export default function List() {
 
   return (
     <div className="flex flex-wrap mb-4">
-      <div className="w-full bg-teal-500 text-white align-middle p-3">
-        <span className="font-semiboString()ld">Security Scan Results</span>
+      <div className="flex w-full items-center justify-between bg-teal-500 text-white align-middle p-3">
+        <span className="font-semibold">Security Scan Results</span>
+
+        <Link to="/create" className="bg-transparent text-white font-semibold py-2 px-4 border border-white rounded">
+          Create
+        </Link>
       </div>
 
       <div className="w-full table-container mt-5">
