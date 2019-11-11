@@ -3,3 +3,7 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.jsoneditor {
+  height: 360px !important;
+}

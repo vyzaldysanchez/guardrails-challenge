@@ -76,6 +76,18 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
         throw new Error('Scan Result must have a repository name.');
       }
 
+      if (!queuedAt) {
+        throw new Error('Scan Result must have a queuedAt date.');
+      }
+
+      if (statuses.IN_PROGRESS === status && !scanningAt) {
+        throw new Error('Scan Result must have a scanningAt date.');
+      }
+
+      if ([statuses.SUCCESS, statuses.FAILURE].includes(status) && !finishedAt) {
+        throw new Error('Scan Result must have a finishedAt date.');
+      }
+
       const scanResult = {
         Id: id,
         Status: status,

@@ -8,7 +8,7 @@ export default function ScanResultsListItem({ result }) {
   const routing = useRoutingService({ history: useHistory() });
 
   return (
-    <tr className="hover:bg-gray-200 cursor-pointer" onClick={() => routing.sendToListFindings(result.id)}>
+    <tr className="hover:bg-gray-200 cursor-pointer" onClick={() => routing.goToListFindings(result.id)}>
       <td className="border px-4 py-2">{result.repositoryName}</td>
       <td className="border px-4 py-2">{result.status}</td>
       <td className="border px-4 py-2">{toDateString(result.createdAt)}</td>
