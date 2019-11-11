@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.4'
 services:
   redis:
     restart: always
@@ -6,6 +6,8 @@ services:
     container_name: cache
     expose:
       - 6379
+    networks:
+      - backend
 
   postgres:
     restart: always
@@ -19,10 +21,12 @@ services:
       POSTGRES_DB: challenge
     volumes:
       - "/usr/local/postgresql-persistence:/var/lib/postgresql/data"
+    networks:
+      - backend
 
   api:
     restart: always
-    container_name: api
+    container_name: challenge-api
     build: ./api
     depends_on:
       - postgres
@@ -41,15 +45,27 @@ services:
       - "5000:3000"
     volumes:
       - "./api:/api:delegated"
+    networks:
+      - frontend
+      - backend
 
   dashboard:
     restart: always
-    container_name: dashboard
+    container_name: challenge-dashboard
     build: ./dashboard
+    depends_on:
+      - api
     environment:
-      NODE_ENV: development
-      # - NODE_ENV: production
+      # NODE_ENV: development
+      NODE_ENV: production
+      REACT_APP_API_URL: http://localhost:5000
     ports:
       - "3001:3000"
     volumes:
       - "./dashboard:/dashboard:delegated"
+    networks:
+      - frontend
+
+networks:
+  backend:
+  frontend:

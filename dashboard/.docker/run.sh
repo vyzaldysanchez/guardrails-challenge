@@ -1,5 +1,7 @@
 #!/bin/bash
 # Install deps and Run migrations
-npm install
+yarn install
 
-npm start
+yarn start
+
+# Use production build to finish
