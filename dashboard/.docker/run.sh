@@ -4,4 +4,6 @@ yarn install
 
 yarn start
 
-# Use production build to finish
+# Production build
+# yarn build
+# serve -S build -l 3000

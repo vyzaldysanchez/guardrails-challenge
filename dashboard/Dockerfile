@@ -1,6 +1,6 @@
 FROM node:12.13.0
 
-RUN npm i -g --silent react-scripts@3.2.0
+RUN yarn global add --silent react-scripts@3.2.0 serve tailwindcss
 
 RUN mkdir /dashboard
 
