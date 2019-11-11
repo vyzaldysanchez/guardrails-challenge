@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useForm from 'react-hook-form';
 import { JsonEditor as Editor } from 'jsoneditor-react';
 import 'jsoneditor-react/es/editor.min.css';
+import Input from '../../shared/Input';
 
 
 const STATUSES = [
@@ -67,12 +68,7 @@ export default function CreateScanResultForm({ createScanResult, onCreate }) {
     <form className="w-full max-w-lg mt-10" onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-6">
         <div className="mb-4 mx-2">
-          <label className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="repositoryName">
-            Repository Name
-          </label>
-          {renderRequiredLabel()}
-          <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="text" placeholder="Your repository name" id="repositoryName" name="repositoryName" ref={register({ required: true })} />
+          <Input label="Repository Name" placeholder="Your repository name" name="repositoryName" register={register} required/>
         </div>
 
         <div className="mb-4 mx-2">
@@ -92,30 +88,15 @@ export default function CreateScanResultForm({ createScanResult, onCreate }) {
         </div>
 
         <div className="mb-4 mx-2">
-          <label className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="queuedAt">
-            Queued At
-          </label>
-          {renderRequiredLabel()}
-          <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="datetime-local" id="queuedAt" name="queuedAt" ref={register({ required: true })} />
+          <Input label="Queued At" name="queuedAt" type="datetime-local" register={register} required/>
         </div>
 
         <div className="mb-4 mx-2">
-          <label className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="scanningAt">
-            Scanning At
-          </label>
-          {statusIsRequired[status] && statusIsRequired['In Progress'](status) && renderRequiredLabel()}
-          <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="datetime-local" id="scanningAt" name="scanningAt" ref={register({ required: STATUSES[1] === status })} />
+          <Input label="Scanning At" name="scanningAt" type="datetime-local" register={register} required={statusIsRequired[status] && statusIsRequired['In Progress'](status)}/>
         </div>
 
         <div className="mb-4 mx-2">
-          <label className="uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="finishedAt">
-            Finished At
-          </label>
-          {statusIsRequired.Finished(status) && renderRequiredLabel()}
-          <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="datetime-local" id="finishedAt" name="finishedAt" ref={register({ required: STATUSES.slice(2).includes(status) })} />
+          <Input label="Finished At" name="finishedAt" type="datetime-local" register={register} required={statusIsRequired.Finished(status)} />
         </div>
 
         <div className="mb-4 mx-2">
