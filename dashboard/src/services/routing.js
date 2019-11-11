@@ -1,11 +1,15 @@
 let routing;
 
-export default function useRoutingServiceuseRoutingService({ history, recreate }) {
+export default function useRoutingService({ history, recreate }) {
   if (recreate || !routing) {
     routing = Object.freeze({
-      sendToListFindings(scanResultId) {
+      goToListFindings(scanResultId) {
         history.push(`/scan-results/${scanResultId}/findings`);
-      }
+      },
+
+      goHome() {
+        history.go('/');
+      },
     });
   }
 
