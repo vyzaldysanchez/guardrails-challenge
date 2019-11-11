@@ -4,8 +4,11 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
+import * as Sentry from '@sentry/browser';
 import Header from './components/page/Header';
 import List from './components/scan-results/List';
+
+Sentry.init({ dns: process.env.REACT_APP_SENTRY_DSN });
 
 function App() {
   return (

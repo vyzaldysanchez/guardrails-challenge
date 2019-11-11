@@ -59,6 +59,7 @@ services:
       # NODE_ENV: development
       NODE_ENV: production
       REACT_APP_API_URL: http://localhost:5000
+      REACT_APP_SENTRY_DSN: https://bdd23d649f984c2686b9ebab5ebbe74e@sentry.io/1814962
     ports:
       - "3001:3000"
     volumes:
