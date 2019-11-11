@@ -27,7 +27,7 @@ function hasErrors(errors) {
   return Object.keys(errors).length > 0;
 }
 
-export default function CreateScanResultForm({ createScanResult, onCreate }) {
+export default function CreateScanResultForm({ createScanResult, onCreate = () => null }) {
   const [findings, setFindings] = useState([]);
   const [error, setError] = useState('');
   const {

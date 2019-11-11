@@ -31,7 +31,7 @@ export default function Findings() {
     );
   }
 
-  if (!scanResult.findings.length) {
+  if (!(scanResult.findings || []).length) {
     return (
       <div className="flex flex-wrap mb-4 text-center">
         <h2>No findings found...</h2>

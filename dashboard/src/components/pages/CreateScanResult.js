@@ -19,7 +19,7 @@ export default function CreateScanResult() {
         <span className="font-semibold">Create Security Scan Result</span>
       </div>
 
-      <CreateScanResultForm createScanResult={createScanResult} onCreate={routing.goHome} />
+      <CreateScanResultForm createScanResult={createScanResult} />
     </div>
   );
 }

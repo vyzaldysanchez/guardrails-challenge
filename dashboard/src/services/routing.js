@@ -8,7 +8,7 @@ export default function useRoutingService({ history, recreate }) {
       },
 
       goHome() {
-        history.go('/');
+        history.push('/');
       },
     });
   }
