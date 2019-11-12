@@ -10,16 +10,20 @@ const makeDatabase = require('./mocks/database');
 describe('GET /scan-results/:id', () => {
   let router;
 
+  function initAPIWithDB(empty) {
+    initAPI({
+      router,
+      database: makeDatabase(empty),
+      captureErrors: () => null,
+      factory: null,
+    });
+  }
+
   describe('unknown id', () => {
     before(() => {
       router = express();
 
-      initAPI({
-        router,
-        database: makeDatabase(true),
-        captureErrors: () => null,
-        factory: null,
-      });
+      initAPIWithDB(true);
     });
 
     it('should return HTTP 404 for unknown id', async () => {
@@ -34,12 +38,7 @@ describe('GET /scan-results/:id', () => {
     before(() => {
       router = express();
 
-      initAPI({
-        router,
-        database: makeDatabase(),
-        captureErrors: () => null,
-        factory: null,
-      });
+      initAPIWithDB();
     });
 
     it('should return scan result for specified id - HTTP 200', async () => {
