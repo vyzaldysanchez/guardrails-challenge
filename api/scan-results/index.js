@@ -1,7 +1,6 @@
 'use strict';
 
-
-function init({ database, router, captureErrors, factory }) {
+function initAPI({ database, router, captureErrors, factory }) {
   router.get(
     '/scan-results',
     async function handleResultsList(_req, res) {
@@ -58,4 +57,4 @@ function init({ database, router, captureErrors, factory }) {
   );
 }
 
-module.exports = init;
+module.exports = initAPI;

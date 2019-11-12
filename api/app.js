@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const db = require('./db');
 const { scanResultsDB, factory } = require('./data-accessors');
-const initModule = require('./scan-results');
+const initAPI = require('./scan-results');
 const { makeCaptureErrors, logger } = require('./utils');
 const swaggerConfig = require('./swagger.json');
 
@@ -32,7 +32,7 @@ app.use(compression());
 app.use(limiter);
 app.use(cors());
 
-initModule({
+initAPI({
   router,
   factory,
   database: scanResultsDB,
