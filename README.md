@@ -70,5 +70,4 @@ We are using [sequelize](http://docs.sequelizejs.com/manual/installation/getting
 
 ## Coming soon
 
-* Important unit tests coverage
-* Integration tests
+* Important frontend test coverage.
