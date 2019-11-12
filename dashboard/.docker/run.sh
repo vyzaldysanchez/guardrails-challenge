@@ -1,6 +1,6 @@
 #!/bin/bash
-# Install deps and Run migrations
-# yarn install
+# Install deps
+yarn install
 
 # yarn start
 
