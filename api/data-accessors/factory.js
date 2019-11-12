@@ -7,7 +7,7 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
         throw new Error('Finding metadata must have a description.');
       }
 
-      if (!severities.includes(severity)) {
+      if (!severities.includes(severity.toUpperCase())) {
         throw new Error('Finding metadata must have a valid severity.');
       }
 
@@ -72,7 +72,9 @@ module.exports = function makeFactory({ severities, statuses, generateId, date }
       scanningAt,
       finishedAt,
     } = {}) {
-      if (!statuses.includes(status)) {
+      const allStatuses = Object.values(statuses);
+
+      if (!allStatuses.includes(status)) {
         throw new Error('Scan Result status must be valid.');
       }
 

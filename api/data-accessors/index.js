@@ -13,7 +13,7 @@ const factory = makeScanResultsFactory({
   generateId: () => uuid(),
   date: moment,
   severities: Object.values(SEVERITIES),
-  statuses: Object.values(STATUSES),
+  statuses: STATUSES,
 });
 
 const scanResultsDB = makeScanResultsDataAccess({
