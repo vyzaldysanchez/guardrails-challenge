@@ -1,3 +1,5 @@
+const makeFactory = require('./../../../data-accessors/factory');
+
 const BASE_RESULT = {
   id: '36a90cef-8dc4-4520-8a06-e058e14d42c4',
   status: 'Queued',
@@ -43,5 +45,11 @@ module.exports = function makeDatabase(empty) {
 
       return BASE_RESULT;
     },
+
+    async create(payload) {
+      return makeFactory().makeScanResult(payload);
+    },
   });
-}
+};
+
+module.exports.BASE_RESULT = BASE_RESULT;

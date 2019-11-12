@@ -26,7 +26,7 @@ describe('GET /scan-results/:id', () => {
       initAPIWithDB(true);
     });
 
-    it('should return HTTP 404 for unknown id', async () => {
+    it('should return error for unknown id - HTTP 404', async () => {
       const response = await request(router).get('/scan-results/1');
 
       assert.equal(response.status, 404);
